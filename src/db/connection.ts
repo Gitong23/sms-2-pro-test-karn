@@ -1,12 +1,38 @@
 import mongoose from 'mongoose';
 import config from '../config';
+import Pokemon from '../models/pokemon.model';
+import { pokemons } from './mockData';
+import logger from '../utils/logger';
+
+const seedPokemons = async (): Promise<void> => {
+  
+  const db = mongoose.connection.db;
+
+  if (!db) {
+    throw new Error('Database connection is not ready.');
+  }
+
+  const collections = await db.listCollections({ name: 'pokemons' }).toArray();
+
+  if (collections.length > 0) {
+    logger.info('Pokemons collection already exists. Skipping seeding.');
+    return;
+  }
+
+  logger.info('Pokemons collection not found. Seeding data...');
+
+  await Pokemon.insertMany(pokemons);
+  logger.info('Pokemons seeded successfully.');
+};
 
 const connectDB = async (): Promise<void> => {
   try {
     const connection = await mongoose.connect(config.mongoDB.uri!);
-    console.log(`MongoDB connected: ${connection.connection.host}`);
+    logger.info(`MongoDB connected: ${connection.connection.host}`);
+
+    await seedPokemons();
   } catch (error) {
-    console.error(`Error: ${(error as Error).message}`);
+    logger.error(`Error: ${(error as Error).message}`);
     process.exit(1);
   }
 };
