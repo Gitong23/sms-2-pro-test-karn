@@ -47,5 +47,4 @@ const PokemonSchema: Schema = new Schema({
   isLegendary: { type: Boolean, default: false },
 });
 
-// Create and export the Pokémon model
 export default mongoose.model<IPokemon>('Pokemon', PokemonSchema);
