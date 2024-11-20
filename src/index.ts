@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(requestLogger);
 
-app.use('/', router());
+app.use('/', router);
 
 //middleware after handler
 app.use(errorHandler);
