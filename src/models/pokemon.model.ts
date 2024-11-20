@@ -25,7 +25,7 @@ export interface IPokemon extends Document {
 // Define the Pokémon schema
 const PokemonSchema: Schema = new Schema({
   name: { type: String, required: true, unique: true },
-  types: { type: [String], required: true }, // Array of Pokémon types
+  types: { type: [String], required: true },
   abilities: [
     {
       name: { type: String, required: true },
@@ -40,11 +40,11 @@ const PokemonSchema: Schema = new Schema({
     specialDefense: { type: Number, required: true },
     speed: { type: Number, required: true },
   },
-  height: { type: Number, required: true }, // Height in decimeters
-  weight: { type: Number, required: true }, // Weight in hectograms
-  baseExperience: { type: Number, required: true }, // Base experience
-  image: { type: String, required: true }, // URL to the image
-  isLegendary: { type: Boolean, default: false }, // Default to false
+  height: { type: Number, required: true },
+  weight: { type: Number, required: true },
+  baseExperience: { type: Number, required: true },
+  image: { type: String, required: true },
+  isLegendary: { type: Boolean, default: false },
 });
 
 // Create and export the Pokémon model
