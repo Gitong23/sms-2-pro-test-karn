@@ -17,7 +17,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
   logger.error(`${req.method} ${req.url} - ${message} - ${err.stack}`);
 
   res.status(statusCode).json({
+    success: false,
     message,
-    // error: process.env.NODE_ENV === 'production' ? undefined : err.stack,
   });
 };
