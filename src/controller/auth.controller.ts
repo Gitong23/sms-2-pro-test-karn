@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 import authService from "../services/auth.service";
 import { z } from "zod";
 import { validate } from "../utils/validation";
@@ -16,25 +16,25 @@ const registerSchema = z.object({
 // Infer the schema type
 // type RegisterSchema = z.infer<typeof registerSchema>;
 
-const register = async (req: Request, res: Response, next: NextFunction) => {
+const register: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validate(registerSchema, req.body);
     const { username, password } = validateData;
     const result = await authService.register(username, password);
     res.status(201).json(result);
   } catch (error) {
-    if (error instanceof Error) next(error);
+    next(error);
   }
 };
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validate(loginSchema, req.body);
     const { username, password } = validateData;
     const result = await authService.login(username, password);
     res.json(result);
   } catch (error) {
-    if (error instanceof Error) next(error);
+    next(error);
   }
 };
 
