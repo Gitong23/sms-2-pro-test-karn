@@ -5,6 +5,6 @@ const pokemonRouter = express.Router();
 
 pokemonRouter.get('/random', getRandomPokemon);
 pokemonRouter.get('/:name', getPokemonByName);
-pokemonRouter.get('/:name/abilities', getPokemonAbilities);
+pokemonRouter.get('/:name/ability', getPokemonAbilities);
 
 export default pokemonRouter;
