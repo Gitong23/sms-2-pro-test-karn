@@ -14,10 +14,16 @@ const http = {
   PORT: process.env.PORT || 3000,
 };
 
+const redis = {
+  host: process.env.REDIS_HOST || '',
+  port: process.env.REDIS_PORT || '',
+}
+
 const config = {
   http,
   mongoDB,
   jwt,
+  redis
 };
 
 export default config;

@@ -4,8 +4,7 @@ import config from './config';
 import router from './router';
 import { errorHandler } from './middleware/error.midleware';
 import requestLogger from './middleware/logger.middleware';
-
-connectDB();
+import { initRedis } from './db/redis';
 
 const app = express();
 
@@ -19,6 +18,17 @@ app.use('/', router);
 app.use(errorHandler);
 
 const PORT = config.http.PORT;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+(async () => {
+  try {
+    await connectDB();
+    await initRedis();
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error('Failed to start the server:', err);
+    process.exit(1);
+  }
+})();
