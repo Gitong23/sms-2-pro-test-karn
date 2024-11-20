@@ -3,14 +3,24 @@ version: '3.8'
 services:
   mongo:
     image: mongo:6.0
-    container_name: mongodb
+    container_name: mongo
     ports:
-      - "27017:27017"
+      - "27017:27017" # Expose MongoDB on localhost:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      - mongo_data:/data/db
+      - mongo_data:/data/db # Persistent storage for MongoDB
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379" # Expose Redis on localhost:6379
+    command: ["--appendonly", "yes"] # Enable persistence
+    volumes:
+      - redis_data:/data # Persistent storage for Redis
 
 volumes:
   mongo_data:
+  redis_data:
