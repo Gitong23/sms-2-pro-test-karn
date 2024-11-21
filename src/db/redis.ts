@@ -9,6 +9,9 @@ const initRedis = async (): Promise<void> => {
     // Create the Redis client
     redisClient = createClient({
       url: `redis://${config.redis.host}:${config.redis.port}`,
+      socket: {
+        connectTimeout: 5000,
+      }
     });
 
     // Redis events
@@ -24,7 +27,7 @@ const initRedis = async (): Promise<void> => {
     await redisClient.connect();
     logger.info(`Redis connection established successfully on port: ${config.redis.port}`);
   } catch (error) {
-    console.error('Failed to connect to Redis:', error);
+    logger.error('Failed to connect to Redis:', error);
     process.exit(1);
   }
 };
