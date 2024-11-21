@@ -7,8 +7,14 @@ services:
     container_name: pokemon-api
     ports:
       - "3000:3000"  # Map app port to host port
-    env_file:
-      - .env  # Load environment variables from .env file
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      MONGO_URI: mongodb://root:example@mongo:27017/pokemon-api?authSource=admin
+      JWT_SECRET: secret_key
+      JWT_EXPIRES_IN: '1h'
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
       - mongo
       - redis
