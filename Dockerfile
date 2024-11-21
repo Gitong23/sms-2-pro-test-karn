@@ -1,35 +1,43 @@
-# Build stage
-FROM node:18-alpine AS build
+# Use a more robust base image for better compatibility
+FROM node:18-bullseye AS build
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for dependency installation
+# Copy package files first to leverage Docker cache
 COPY package*.json ./
 
-# Install all dependencies (including dev dependencies for building)
-RUN npm install
+# Add dependencies required for building some Node.js modules
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
-# Copy the rest of the application files
+# Install dependencies
+RUN npm install --verbose
+
+# Copy the rest of the application code
 COPY . .
 
-# Compile TypeScript files
-RUN npx tsc
+# Copy the .env file into the container
+COPY .env .env
 
-# Production stage
-FROM node:18-alpine AS production
+# Build the application (if applicable)
+RUN npm run build
+
+# Start a clean runtime image
+FROM node:18-bullseye-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for dependency installation
-COPY package*.json ./
+# Copy built files and dependencies from the build stage
+COPY --from=build /app .
 
-# Install production dependencies
-RUN npm ci --only=production
+# Expose the application port
+EXPOSE 3000
 
-# Copy compiled files from the build stage
-COPY --from=build /app/dist ./dist
-
-# Run the application
-CMD ["node", "dist/index.js"]
+# Set the default command to start the application
+CMD ["npm", "start"]

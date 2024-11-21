@@ -5,3 +5,4 @@ docker-compose.yml
 *.log
 .env
 coverage
+package-lock.json
