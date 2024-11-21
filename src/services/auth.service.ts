@@ -32,7 +32,7 @@ class AuthService implements IAuthService {
   ): Promise<{ access_token: string }> {
     const user = await User.findOne({ username });
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new Error("Not found user");
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
