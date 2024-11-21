@@ -21,6 +21,11 @@ const initRedis = async (): Promise<void> => {
 
     redisClient.on('error', (err) => {
       logger.error('Redis connection error:', err);
+
+      if (err.code === 'ECONNREFUSED') {
+        logger.error('Redis connection refused. Stopping the server.');
+        process.exit(1);
+      }
     });
 
     // Connect to Redis
