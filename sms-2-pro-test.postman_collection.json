@@ -1,0 +1,1178 @@
+{
+	"info": {
+		"_postman_id": "b4a57c94-685f-47e6-9cd3-3b2f54817a2c",
+		"name": "sms-2-pro-test",
+		"description": "**SMS-2-Pro Test API Documentation**\n\n**Overview**  \nThe SMS-2-Pro Test API provides endpoints for user authentication and Pokémon-related data retrieval. The API supports features like user registration, login, fetching Pokémon details, abilities, and retrieving random Pokémon. Authentication is required for most endpoints, using a Bearer Token provided upon successful login.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23793756"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"karn003\",\r\n    \"password\": \"A123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v2/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"karn003\",\r\n    \"password\": \"A123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v2/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-nMoFx54+czTntmSLXl3mqIsZV4A\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:36:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\"\n}"
+						},
+						{
+							"name": "Invalid password format",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"karn003\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v2/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"51-c3+M60Z1PY1vMrl6/rUufchsZR4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:37:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Password must contain at least one uppercase letter\"\n}"
+						},
+						{
+							"name": "Invalid Username format",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"ka3\",\r\n    \"password\": \"A123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v2/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-3Y305p5pr1ih9AwiRoHR2UfVEVU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:39:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Username must be at least 4 characters long\"\n}"
+						},
+						{
+							"name": "Duplicate User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"kar3\",\r\n    \"password\": \"A123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v2/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-WKEMg8zALB1Ko0WjUHi/6RBGHVc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:47:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"User already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"karn003\",\r\n    \"password\": \"A123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v2/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"karn003\",\r\n    \"password\": \"A123456a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v2/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"da-+/SV1EpQv4qhCTF1epjsJ02HL7A\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:41:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2Y1MzdlYzlhZjg2NzNiNjEyMTI0ZiIsInVzZXJuYW1lIjoia2FybjAwMyIsImlhdCI6MTczMjIwMzY4NCwiZXhwIjoxNzMyMjA3Mjg0fQ.ZS_PCXzI7FJxax_lLTMR2L0OrXyY4AIHwWMIyMR6g3U\"\n}"
+						},
+						{
+							"name": "Not Found User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"kar003\",\r\n    \"password\": \"A12456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v2/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-gLWUCj9doQtOUNprn9E43f+sIs8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:50:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Not found user\"\n}"
+						},
+						{
+							"name": "Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"karn003\",\r\n    \"password\": \"A123456a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/v2/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-VmptvJVCxgMiCaKMQdd9IkNBIdc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:52:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid credentials\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Pokemon",
+			"item": [
+				{
+					"name": "get pokemon by name",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v2/pokemon/:name",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"pokemon",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "Gengar"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon/:name",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Gengar"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-Xgv+GaqVb5MdihttTXhzczcstUY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:53:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid or expired token\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/v2/pokemon/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Gengar"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "444"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1bc-63fGhMFOUHxwZ7uAEpKtATSD/2c\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:56:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"stats\": {\n            \"hp\": 60,\n            \"attack\": 65,\n            \"defense\": 60,\n            \"specialAttack\": 130,\n            \"specialDefense\": 75,\n            \"speed\": 110\n        },\n        \"_id\": \"673f4d4377518f2ee8f615ed\",\n        \"name\": \"Gengar\",\n        \"types\": [\n            \"Ghost\",\n            \"Poison\"\n        ],\n        \"abilities\": [\n            {\n                \"name\": \"Cursed Body\",\n                \"hidden\": true,\n                \"_id\": \"673f4d4377518f2ee8f615ee\"\n            }\n        ],\n        \"height\": 15,\n        \"weight\": 405,\n        \"baseExperience\": 225,\n        \"image\": \"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png\",\n        \"isLegendary\": false,\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Not found name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/v2/pokemon/:name",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Gengara"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-b8y4tL/aSPRoP7Ek17XGmHTLvk0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:57:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Pokemon with name \\\"Gengara\\\" not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get pokemon abilities by name",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v2/pokemon/:name/ability",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"pokemon",
+								":name",
+								"ability"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "Mewtwo"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon/:name/ability",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										":name",
+										"ability"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mewtwo"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-Xgv+GaqVb5MdihttTXhzczcstUY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:53:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid or expired token\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/v2/pokemon/:name/ability",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										":name",
+										"ability"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mewtwo"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-0rGSCBGgmPmz9TWSYoyEpx/LCsI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:59:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"name\": \"Pressure\",\n            \"hidden\": false,\n            \"_id\": \"673f4d4377518f2ee8f615eb\"\n        },\n        {\n            \"name\": \"Unnerve\",\n            \"hidden\": true,\n            \"_id\": \"673f4d4377518f2ee8f615ec\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/v2/pokemon/:name/ability",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										":name",
+										"ability"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Mewtwoa"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-Q66P/hgLtBnfl9GxGMU2xyzn5IU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:59:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Abilities for Pokemon \\\"Mewtwoa\\\" not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get random pokemon",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v2/pokemon/random",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"pokemon",
+								"random"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon/random",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										"random"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-Xgv+GaqVb5MdihttTXhzczcstUY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 15:54:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid or expired token\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/v2/pokemon/random",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										"random"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "509"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1fd-7j3vAAm3+MvbwuvV0XBrUe/Yssw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 16:03:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"stats\": {\n            \"hp\": 45,\n            \"attack\": 49,\n            \"defense\": 49,\n            \"specialAttack\": 65,\n            \"specialDefense\": 65,\n            \"speed\": 45\n        },\n        \"_id\": \"673f4d4377518f2ee8f615e4\",\n        \"name\": \"Bulbasaur\",\n        \"types\": [\n            \"Grass\",\n            \"Poison\"\n        ],\n        \"abilities\": [\n            {\n                \"name\": \"Overgrow\",\n                \"hidden\": false,\n                \"_id\": \"673f4d4377518f2ee8f615e5\"\n            },\n            {\n                \"name\": \"Chlorophyll\",\n                \"hidden\": true,\n                \"_id\": \"673f4d4377518f2ee8f615e6\"\n            }\n        ],\n        \"height\": 7,\n        \"weight\": 69,\n        \"baseExperience\": 64,\n        \"image\": \"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png\",\n        \"isLegendary\": false,\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
