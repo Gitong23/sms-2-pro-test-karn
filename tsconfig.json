@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": "./src",
-    "paths": {
-      "*": ["*"]
-    },
+    "target": "ES2015",             // Target ECMAScript 2015 (or higher)
+    "module": "commonjs",           // Keep this as "commonjs" for Node.js
+    "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "strict": true
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "skipLibCheck": true,           // Avoid checking types in node_modules
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
