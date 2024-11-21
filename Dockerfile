@@ -21,9 +21,6 @@ RUN npm install --verbose
 # Copy the rest of the application code
 COPY . .
 
-# Copy the .env file into the container
-COPY .env .env
-
 # Build the application (if applicable)
 RUN npm run build
 
