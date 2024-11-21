@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  app:
+    build:
+      context: .  # Path to your Dockerfile
+    container_name: pokemon-api
+    ports:
+      - "3000:3000"  # Map app port to host port
+    env_file:
+      - .env  # Load environment variables from .env file
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - app_network
+
   mongo:
     image: mongo:6.0
     container_name: mongo
@@ -11,16 +25,24 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongo_data:/data/db
+    networks:
+      - app_network
 
   redis:
     image: redis:7
     container_name: redis
     ports:
       - "6379:6379"
-    command: ["--appendonly", "yes"]
+    command: ["--appendonly", "yes"]  # Enable persistence
     volumes:
       - redis_data:/data
+    networks:
+      - app_network
 
 volumes:
   mongo_data:
   redis_data:
+
+networks:
+  app_network:
+    driver: bridge
