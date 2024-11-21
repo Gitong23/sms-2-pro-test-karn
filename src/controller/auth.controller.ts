@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import { RequestHandler } from "express";
 import authService from "../services/auth.service";
 import { z } from "zod";
 import { validate } from "../utils/validation";
@@ -10,7 +10,10 @@ const loginSchema = z.object({
 
 const registerSchema = z.object({
   username: z.string().min(4, "Username must be at least 4 characters long"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters long")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter"),
 });
 
 // Infer the schema type
