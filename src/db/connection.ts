@@ -27,12 +27,17 @@ const seedPokemons = async (): Promise<void> => {
 
 const connectDB = async (): Promise<void> => {
   try {
-    const connection = await mongoose.connect(config.mongoDB.uri!);
+    const connection = await mongoose.connect(config.mongoDB.uri!,{
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      maxPoolSize: 50,
+      minPoolSize: 5,
+    });
     logger.info(`MongoDB connected: ${connection.connection.host}`);
 
     await seedPokemons();
   } catch (error) {
-    logger.error(`Error: ${(error as Error).message}`);
+    logger.error(`Error connecting to MongoDB: ${(error as Error).message}`);
     process.exit(1);
   }
 };
