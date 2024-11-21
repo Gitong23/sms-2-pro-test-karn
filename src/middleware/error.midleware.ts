@@ -10,8 +10,8 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     statusCode = 400;
     message = err.errors.map((error) => error.message).join(', ');
   } else {
-    statusCode = err.status || 500;
-    message = err.message || 'Internal Server Error';
+    statusCode = err.status || 400;
+    message = err.message;
   }
 
   logger.error(`${req.method} ${req.url} - ${message} - ${err.stack}`);
