@@ -2,8 +2,7 @@ import Pokemon, { IPokemon } from "../models/pokemon.model";
 import { redisClient } from "../db/redis";
 import logger from "../utils/logger";
 
-//temp test
-const REDIS_TTL = 5; // cache for 10 minute
+const REDIS_TTL = 600; // cache for 10 minutes
 
 interface IPokemonService {
   getByName(name: string): Promise<IPokemon | null>;
